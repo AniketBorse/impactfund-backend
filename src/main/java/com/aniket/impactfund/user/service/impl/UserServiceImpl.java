@@ -1,5 +1,6 @@
 package com.aniket.impactfund.user.service.impl;
 
+import com.aniket.impactfund.common.exception.DuplicateResourceException;
 import com.aniket.impactfund.user.dto.request.RegisterUserRequest;
 import com.aniket.impactfund.user.dto.response.UserResponse;
 import com.aniket.impactfund.user.entity.User;
@@ -19,35 +20,41 @@ public class UserServiceImpl implements UserService {
 
     private void validateRequest(RegisterUserRequest request) {
         if(userRepository.existsByEmail(request.email().trim().toLowerCase())) {
-            throw new IllegalArgumentException("Email Already Exists");
+            throw new DuplicateResourceException("User",
+                    "email",
+                    request.email()
+            );
         }
 
         if(userRepository.existsByPhoneNumber(request.phoneNumber())) {
-            throw new IllegalArgumentException("Phone Number Already Exists");
+            throw new DuplicateResourceException("User",
+                    "phoneNumber",
+                    request.phoneNumber()
+            );
         }
     }
 
     private User buildUser(RegisterUserRequest request) {
         return User.builder()
-                .firstName(request.firstName().trim())
-                .lastName(request.lastName().trim())
-                .email(request.email().trim().toLowerCase())
-                .phoneNumber(request.phoneNumber())
-                .password(passwordEncoder.encode(request.password()))
-                .dateOfBirth(request.dateOfBirth())
-                .status(UserStatus.PENDING_VERIFICATION)
-                .emailVerified(false)
-                .phoneVerified(false)
-                .build();
+            .firstName(request.firstName().trim())
+            .lastName(request.lastName().trim())
+            .email(request.email().trim().toLowerCase())
+            .phoneNumber(request.phoneNumber())
+            .password(passwordEncoder.encode(request.password()))
+            .dateOfBirth(request.dateOfBirth())
+            .status(UserStatus.PENDING_VERIFICATION)
+            .emailVerified(false)
+            .phoneVerified(false)
+            .build();
     }
 
     private UserResponse mapToResponse(User user) {
         return new UserResponse(
-                user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhoneNumber()
+            user.getId(),
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getPhoneNumber()
         );
     }
 

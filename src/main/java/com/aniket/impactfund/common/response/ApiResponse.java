@@ -1,0 +1,12 @@
+package com.aniket.impactfund.common.response;
+
+import java.time.Instant;
+import java.util.List;
+
+public record ApiResponse<T>(
+        boolean success,
+        String message,
+        T data,
+        List<ErrorResponse> error,
+        Instant timeStamp
+) { }
