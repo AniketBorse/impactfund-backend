@@ -1,5 +1,8 @@
 package com.aniket.impactfund.auth.controller;
 
+import com.aniket.impactfund.auth.dto.request.LoginRequest;
+import com.aniket.impactfund.auth.dto.response.LoginResponse;
+import com.aniket.impactfund.auth.service.AuthService;
 import com.aniket.impactfund.user.dto.request.RegisterUserRequest;
 import com.aniket.impactfund.user.dto.response.UserResponse;
 import com.aniket.impactfund.user.service.UserService;
@@ -13,10 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse register(@Valid @RequestBody RegisterUserRequest request) {
         return userService.register(request);
+    }
+
+    @PostMapping("/login")
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 }
