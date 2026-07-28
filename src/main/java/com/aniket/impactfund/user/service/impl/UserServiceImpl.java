@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     private UserResponse mapToResponse(User user) {
         return new UserResponse(
-            user.getId(),
+            user.getUuid(),
             user.getFirstName(),
             user.getLastName(),
             user.getEmail(),

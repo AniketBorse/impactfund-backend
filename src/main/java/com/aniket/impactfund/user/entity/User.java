@@ -15,6 +15,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class User extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
