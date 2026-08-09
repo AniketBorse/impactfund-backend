@@ -2,10 +2,12 @@ package com.aniket.impactfund.borrower.dto.response;
 
 import com.aniket.impactfund.borrower.enums.EmploymentType;
 import com.aniket.impactfund.borrower.enums.VerificationStatus;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Builder
 public record BorrowerResponse (
         UUID uuid,
 
