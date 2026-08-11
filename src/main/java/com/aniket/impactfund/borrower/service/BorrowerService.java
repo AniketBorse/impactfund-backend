@@ -11,8 +11,6 @@ public interface BorrowerService {
 
     BorrowerResponse getCurrentBorrower();
 
-    BorrowerResponse getMyProfile();
-
     BorrowerResponse updateBorrower(UpdateBorrowerRequest request);
 
     BorrowerResponse getBorrower(UUID uuid);

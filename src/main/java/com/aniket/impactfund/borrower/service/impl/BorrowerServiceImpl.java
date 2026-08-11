@@ -97,11 +97,6 @@ public class BorrowerServiceImpl implements BorrowerService {
     }
 
     @Override
-    public BorrowerResponse getMyProfile() {
-        return null;
-    }
-
-    @Override
     public BorrowerResponse updateBorrower(UpdateBorrowerRequest request) {
         User currentUser = getCurrentUser();
         Borrower borrower = borrowerRepository.findByUser(currentUser)
