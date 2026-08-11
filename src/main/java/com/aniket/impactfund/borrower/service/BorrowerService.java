@@ -9,6 +9,8 @@ import java.util.UUID;
 public interface BorrowerService {
     BorrowerResponse createBorrower(CreateBorrowerRequest request);
 
+    BorrowerResponse getCurrentBorrower();
+
     BorrowerResponse getMyProfile();
 
     BorrowerResponse updateBorrower(UpdateBorrowerRequest request);
