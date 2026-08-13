@@ -1,5 +1,8 @@
 package com.aniket.impactfund.common.exception;
 
+import lombok.Getter;
+
+@Getter
 public class ResourceNotFoundException extends RuntimeException {
     private final String resource;
     private final String field;
@@ -11,18 +14,6 @@ public class ResourceNotFoundException extends RuntimeException {
         this.resource = resource;
         this.field = field;
         this.value = value;
-    }
-
-    public String getResource() {
-        return resource;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public Object getValue() {
-        return value;
     }
 
     public String getDetailedMessage() {

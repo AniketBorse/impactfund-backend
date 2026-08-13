@@ -75,4 +75,25 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(response);
     }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleResourceAlreadyExistsException(ResourceAlreadyExistsException ex) {
+
+        ApiResponse<Void> response =
+                new ApiResponse<>(
+                        false,
+                        ex.getMessage(),
+                        null,
+                        List.of(
+                                new ErrorResponse(
+                                        ex.getField(),
+                                        ex.getDetailedMessage()
+                                )
+                        ),
+                        Instant.now()
+                );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(response);
+    }
 }
