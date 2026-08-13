@@ -2,6 +2,7 @@ package com.aniket.impactfund.loan.entity;
 
 import com.aniket.impactfund.borrower.entity.Borrower;
 import com.aniket.impactfund.common.audit.BaseEntity;
+import com.aniket.impactfund.loan.enums.LoanPurpose;
 import com.aniket.impactfund.loan.enums.LoanStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,8 +35,9 @@ public class Loan extends BaseEntity {
     @Column(name = "tenure_months", nullable = false)
     private Integer tenureMonths;
 
-    @Column(length = 250)
-    private String purpose;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private LoanPurpose purpose;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
