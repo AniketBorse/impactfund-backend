@@ -1,5 +1,6 @@
 package com.aniket.impactfund.loan.dto.request;
 
+import com.aniket.impactfund.loan.enums.LoanPurpose;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -23,6 +24,6 @@ public record CreateLoanRequest(
         @Min(value = 1, message = "Tenure must be at least 1 month")
         Integer tenureMonths,
 
-        @Size(max = 250, message = "")
-        String purpose
+        @NotNull(message = "Purpose is required")
+        LoanPurpose purpose
 ) { }

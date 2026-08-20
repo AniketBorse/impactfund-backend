@@ -1,6 +1,7 @@
 package com.aniket.impactfund.loan.service;
 
 import com.aniket.impactfund.loan.dto.request.CreateLoanRequest;
+import com.aniket.impactfund.loan.dto.request.RejectionLoanRequest;
 import com.aniket.impactfund.loan.dto.response.LoanResponse;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface LoanService {
     List<LoanResponse> getAllLoans();
 
     List<LoanResponse> getLoansByBorrower(UUID borrowerUuid);
+
+    LoanResponse approveLoan(UUID loanUuid);
+
+    LoanResponse rejectLoan(UUID loanUuid, RejectionLoanRequest request);
 }

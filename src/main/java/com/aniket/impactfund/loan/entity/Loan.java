@@ -47,9 +47,12 @@ public class Loan extends BaseEntity {
     @Column(name = "application_date", nullable = false)
     private LocalDate applicationDate;
 
-    @Column(name = "approve_date", nullable = false)
+    @Column(name = "approve_date")
     private LocalDate approveDate;
 
-    @Column(name = "funded_date", nullable = false)
+    @Column(name = "funded_date")
     private LocalDate fundedDate;
+
+    @Column(name = "rejection_reason", length = 250)
+    private String rejectionReason;
 }

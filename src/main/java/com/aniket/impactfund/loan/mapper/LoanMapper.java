@@ -15,6 +15,7 @@ public interface LoanMapper {
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "applicationDate", ignore = true)
     @Mapping(target = "approveDate", ignore = true)
+    @Mapping(target = "rejectionReason", ignore = true)
     @Mapping(target = "fundedDate", ignore = true)
     Loan toEntity(CreateLoanRequest request, Borrower borrower);
 

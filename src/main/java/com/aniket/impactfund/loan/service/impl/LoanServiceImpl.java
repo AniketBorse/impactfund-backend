@@ -5,9 +5,9 @@ import com.aniket.impactfund.borrower.repository.BorrowerRepository;
 import com.aniket.impactfund.common.exception.ResourceAlreadyExistsException;
 import com.aniket.impactfund.common.exception.ResourceNotFoundException;
 import com.aniket.impactfund.loan.dto.request.CreateLoanRequest;
+import com.aniket.impactfund.loan.dto.request.RejectionLoanRequest;
 import com.aniket.impactfund.loan.dto.response.LoanResponse;
 import com.aniket.impactfund.loan.entity.Loan;
-import com.aniket.impactfund.loan.enums.LoanPurpose;
 import com.aniket.impactfund.loan.enums.LoanStatus;
 import com.aniket.impactfund.loan.mapper.LoanMapper;
 import com.aniket.impactfund.loan.repository.LoanRepository;
@@ -48,14 +48,14 @@ public class LoanServiceImpl implements LoanService {
 
         boolean duplicatePurpose = loanRepository.existsByBorrowerAndPurposeAndStatusIn(
                 borrower,
-                LoanPurpose.valueOf(request.purpose()),
+                request.purpose(),
                 ACTIVE_LOAN_STATUSES
         );
 
         if(duplicatePurpose) {
             throw new ResourceAlreadyExistsException(
                     "Borrower already have an active loan for the purpose",
-                    request.purpose()
+                    String.valueOf(request.purpose())
             );
         }
 
@@ -103,5 +103,49 @@ public class LoanServiceImpl implements LoanService {
                 .stream()
                 .map(loanMapper :: toResponse)
                 .toList();
+    }
+
+    @Override
+    public LoanResponse approveLoan(UUID loanUuid) {
+        Loan loan = loanRepository.findByUuid(loanUuid)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Loan",
+                                "UUID",
+                                loanUuid
+                        )
+                );
+
+        if(loan.getStatus() != LoanStatus.PENDING) {
+            throw new IllegalStateException("Only pending loans can be approved");
+        }
+
+        loan.setStatus(LoanStatus.APPROVED);
+        loan.setApproveDate(LocalDate.now());
+
+        Loan savedLoan = loanRepository.save(loan);
+        return loanMapper.toResponse(savedLoan);
+    }
+
+    @Override
+    public LoanResponse rejectLoan(UUID loanUuid, RejectionLoanRequest request) {
+        Loan loan = loanRepository.findByUuid(loanUuid)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Loan",
+                                "UUID",
+                                loanUuid
+                        )
+                );
+
+        if(loan.getStatus() != LoanStatus.PENDING) {
+            throw new IllegalStateException("Only pending loans can be approved");
+        }
+
+        loan.setStatus(LoanStatus.REJECTED);
+        loan.setRejectionReason(request.reason());
+
+        Loan savedLoan = loanRepository.save(loan);
+        return loanMapper.toResponse(savedLoan);
     }
 }

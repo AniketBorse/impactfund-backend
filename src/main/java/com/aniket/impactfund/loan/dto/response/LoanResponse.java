@@ -26,6 +26,8 @@ public record LoanResponse(
 
         LocalDate approveDate,
 
-        LocalDate fundedDate
+        LocalDate fundedDate,
+
+        String reason
 ) {
 }
