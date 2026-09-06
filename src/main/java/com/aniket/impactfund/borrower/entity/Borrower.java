@@ -1,7 +1,7 @@
 package com.aniket.impactfund.borrower.entity;
 
 import com.aniket.impactfund.borrower.enums.EmploymentType;
-import com.aniket.impactfund.borrower.enums.VerificationStatus;
+import com.aniket.impactfund.common.enums.VerificationStatus;
 import com.aniket.impactfund.common.audit.BaseEntity;
 import com.aniket.impactfund.user.entity.User;
 import jakarta.persistence.*;

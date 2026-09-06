@@ -1,7 +1,7 @@
 package com.aniket.impactfund.borrower.dto.response;
 
 import com.aniket.impactfund.borrower.enums.EmploymentType;
-import com.aniket.impactfund.borrower.enums.VerificationStatus;
+import com.aniket.impactfund.common.enums.VerificationStatus;
 import lombok.Builder;
 
 import java.math.BigDecimal;

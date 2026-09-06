@@ -1,4 +1,4 @@
-package com.aniket.impactfund.investor.enums;
+package com.aniket.impactfund.common.enums;
 
 public enum VerificationStatus {
     PENDING,

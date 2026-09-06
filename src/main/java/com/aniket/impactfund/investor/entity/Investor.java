@@ -2,7 +2,7 @@ package com.aniket.impactfund.investor.entity;
 
 import com.aniket.impactfund.common.audit.BaseEntity;
 import com.aniket.impactfund.investor.enums.RiskProfile;
-import com.aniket.impactfund.investor.enums.VerificationStatus;
+import com.aniket.impactfund.common.enums.VerificationStatus;
 import com.aniket.impactfund.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
