@@ -11,7 +11,6 @@ import org.mapstruct.Mapping;
 public interface InvestorMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true)
     @Mapping(target = "user", source = "user")
     @Mapping(target = "verificationStatus", ignore = true)
     Investor toEntity(CreateInvestorRequest request, User user);
